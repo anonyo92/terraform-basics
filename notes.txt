@@ -25,7 +25,7 @@ VARIABLES - DECLARATION & VALUE ASSIGNMENT
         }
         It will be overriden by CLI input, File-input (or ENV vars?)
         If variable is declared with no default values and no other way to supply values,
-            it will be asked for on the Command Prompt during plan/apply.
+            a value will be asked for on the Command Prompt during plan/apply.
     2. Command Line Input
         Use -var option, like -var="instancetype=t2.medium" with plan/apply.
     3. File Input
@@ -36,3 +36,8 @@ VARIABLES - DECLARATION & VALUE ASSIGNMENT
         Has to be named like TF_VAR_<variable-name>
             like export TF_VAR_instancetype = "t2.medium" (Unix)
             or setx TF_VAR_instancetype = "t2.medium" (Windows)
+------------------------------------------------------------------------------------------------
+COUNT
+------------------------------------------------------------------------------------------------
+'count' parameter in any resource specifies the number of them to be created.
+count.index refers to the index-th instance of that resource (0-based).
