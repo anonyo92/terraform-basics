@@ -41,3 +41,9 @@ COUNT
 ------------------------------------------------------------------------------------------------
 'count' parameter in any resource specifies the number of them to be created.
 count.index refers to the index-th instance of that resource (0-based).
+------------------------------------------------------------------------------------------------
+CONDITIONAL EXPRESSIONS
+------------------------------------------------------------------------------------------------
+Use the ternary style: condition ? true-value : false-value
+Eg: resource "aws_instance" "dev" { count = var.isdev == true ? 1 : 0 }
+    resource "aws_instance" "prod" { count = var.isdev == false ? 1 : 0 }
