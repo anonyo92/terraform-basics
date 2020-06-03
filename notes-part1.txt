@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------------
-OUTPUTS & ATTRIBUTES
+OUTPUT VALUES & ATTRIBUTES
 ------------------------------------------------------------------------------------------------
 output "output-name" {
     value = "resource-type"."resource-name"."attribute"
@@ -10,13 +10,16 @@ output "output-name" {
         "${aws_eip.lb.public_ip}/32"
     (Use [] for arrays?)
 ------------------------------------------------------------------------------------------------
-VARIABLES - DECLARATION & VALUE ASSIGNMENT
+INPUT VARIABLES
 ------------------------------------------------------------------------------------------------
 [DECLARATION]
     variable "variable-name" {
-        type = "string"
+        type = string
     }
-    Data Types can be "string", "number", "list" or "map". Will be validated. Good practice to specify.
+    Data Types can be "string", "number", "bool", "list", "tuple", "set", "map", "object".
+    "list", "tuple", "set", "map", "object" can also be used as type constructors to specify the element type
+    such as list(object({field1 = val1}))
+    It will be validated. Good practice to specify.
 [ACCESS]
     Can be referred to as var.somevarname
 [ASSIGNMENT]
@@ -37,6 +40,15 @@ VARIABLES - DECLARATION & VALUE ASSIGNMENT
         Has to be named like TF_VAR_<variable-name>
             like export TF_VAR_instancetype = "t2.medium" (Unix)
             or setx TF_VAR_instancetype = "t2.medium" (Windows)
+[CUSTOM VALIDATION-RULES]
+    We can add custom validation rules for a variable using the validation sub-block, like:
+    variable "image_id" {
+        type = "string"
+        validation {
+            condition     = length(var.image_id) > 4 && substr(var.image_id, 0, 4) == "ami-"
+            error_message = "The image_id value must be a valid AMI id, starting with \"ami-\"."
+        }
+    }
 ------------------------------------------------------------------------------------------------
 COUNT
 ------------------------------------------------------------------------------------------------
