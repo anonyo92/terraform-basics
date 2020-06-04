@@ -50,6 +50,25 @@ INPUT VARIABLES
         }
     }
 ------------------------------------------------------------------------------------------------
+LOCAL VALUES
+------------------------------------------------------------------------------------------------
+Defined to be re-used across templates.
+[DEFINITION]
+    locals { variables ... }
+    Eg:
+    locals {
+       custom_tags = {
+           Owner = "Devops team"
+           service = "Backend"
+       }
+    }
+Accessed like local.variablename
+    Eg: local.custom_tags
+Also supports Expressions and Functions, like:
+    Eg: locals {
+            name_prefix = "${var.name != "" ? var.name : var.default}"
+        }
+------------------------------------------------------------------------------------------------
 COUNT
 ------------------------------------------------------------------------------------------------
 'count' parameter in any resource specifies the number of them to be created.
